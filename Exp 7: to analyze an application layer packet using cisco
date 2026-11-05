@@ -1,0 +1,6 @@
+#Commands
+ipconfig
+ping 192.168.1.10
+ping google.com
+nslookup google.com
+ftp 192.168.1.10
