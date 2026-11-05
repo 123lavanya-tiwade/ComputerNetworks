@@ -1,0 +1,51 @@
+#1. UDP Client Program (client.py)
+
+import socket
+
+client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+host = '127.0.0.1'
+port = 12345
+
+print("Connected to UDP Server")
+
+while True:
+    message = input("Enter a message: ")
+
+    client.sendto(message.encode(), (host, port))
+
+    if message.lower() == 'exit':
+        break
+
+    data, addr = client.recvfrom(1024)
+
+    print("Message from Server:", data.decode())
+
+client.close()
+
+2. UDP Server Program (server.py)
+
+import socket
+
+server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+host = '127.0.0.1'
+port = 12345
+
+server.bind((host, port))
+
+print("UDP Server is waiting for messages...")
+
+while True:
+    data, addr = server.recvfrom(1024)
+
+    print("Client Message:", data.decode())
+
+    if data.decode().lower() == 'exit':
+        break
+
+    response = input("Enter reply: ")
+
+    server.sendto(response.encode(), addr)
+
+server.close()
