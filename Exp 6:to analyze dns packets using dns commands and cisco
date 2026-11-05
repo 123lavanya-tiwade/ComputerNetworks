@@ -1,0 +1,15 @@
+#DNS Commands (Run in CMD one by one):
+nslookup google.com
+nslookup google.com 8.8.8.8
+ipconfig /displaydns
+ipconfig /flushdns
+ping google.com
+nslookup youtube.com
+nslookup amazon.com
+tracert google.com
+
+#Cisco Packet Tracer – PC Command Prompt:
+ipconfig
+ping 192.168.1.10
+nslookup www.google.com
+ping www.google.com
