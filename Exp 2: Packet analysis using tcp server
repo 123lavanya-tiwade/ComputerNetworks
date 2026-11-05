@@ -1,0 +1,61 @@
+#tcp server program 
+
+import socket
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+host = '127.0.0.1'
+port = 12345
+
+server.bind((host, port))
+server.listen(1)
+
+print("TCP Server is waiting for connection...")
+
+conn, addr = server.accept()
+print("Connected to:", addr)
+
+while True:
+    data = conn.recv(1024)
+
+    if not data:
+        break
+
+    print("\n--- Packet Analysis ---")
+    print("Source IP:", addr[0])
+    print("Source Port:", addr[1])
+    print("Received Data:", data.decode())
+    print("Packet Size:", len(data), "bytes")
+
+    conn.send("Packet received successfully".encode())
+
+conn.close()
+server.close()
+
+
+#tcp client program 
+
+
+import socket
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+host = '127.0.0.1'
+port = 12345
+
+client.connect((host, port))
+
+print("Connected to TCP Server")
+
+while True:
+    message = input("Enter data to send (exit to stop): ")
+
+    if message.lower() == 'exit':
+        break
+
+    client.send(message.encode())
+
+    response = client.recv(1024)
+    print("Server Response:", response.decode())
+
+client.close()
