@@ -1,0 +1,25 @@
+
+nodes = int(input("Enter number of routers: "))
+
+print("Enter the cost matrix (999 for infinity):")
+
+cost = []
+
+for i in range(nodes):
+    row = list(map(int, input().split()))
+    cost.append(row)
+
+dist = [row[:] for row in cost]
+
+for k in range(nodes):
+    for i in range(nodes):
+        for j in range(nodes):
+            if dist[i][j] > dist[i][k] + dist[k][j]:
+                dist[i][j] = dist[i][k] + dist[k][j]
+
+print("\nDistance Vector Routing Table:")
+
+for i in range(nodes):
+    print("\nRouter", i + 1)
+    for j in range(nodes):
+        print("To Router", j + 1, "Cost =", dist[i][j])
