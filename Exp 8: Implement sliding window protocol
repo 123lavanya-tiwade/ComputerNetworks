@@ -1,0 +1,21 @@
+
+frames = int(input("Enter total number of frames: "))
+window_size = int(input("Enter window size: "))
+
+sent = 0
+
+while sent < frames:
+    print("\nSending frames:")
+
+    for i in range(sent, min(sent + window_size, frames)):
+        print("Frame", i + 1, "sent")
+
+    ack = int(input("Enter last acknowledged frame number: "))
+
+    if ack >= sent + 1 and ack <= min(sent + window_size, frames):
+        print("Acknowledgement received for frames up to", ack)
+        sent = ack
+    else:
+        print("Invalid acknowledgement. Retransmitting window.")
+
+print("\nAll frames sent successfully!")
